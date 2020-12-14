@@ -15,6 +15,11 @@ class CreateSubstancesTable extends Migration
     {
         Schema::create('substances', function (Blueprint $table) {
             $table->id();
+
+            $table->string('INN');
+            // $table->string('mechanism');
+            $table->text('mechanism');
+
             $table->timestamps();
         });
     }

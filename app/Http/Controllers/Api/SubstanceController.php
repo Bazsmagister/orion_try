@@ -2,18 +2,56 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Substance;
+//use App\Models\Substance;
 
 
 //use App\Http\Controllers\Controller;
 use Orion\Http\Controllers\Controller;
+use Orion\Concerns\DisableAuthorization;
 
 //use Illuminate\Http\Request;
 
 class SubstanceController extends Controller
 {
-    protected $model = Substance::class; //or "App\Models\Substance"
+    use DisableAuthorization; // it doesn't give back 403 unautorized.
 
+    //protected $model = Substance::class; //or "App\Models\Substance"
+
+    protected $model = "App\Models\Substance";
+
+
+
+    /**
+    * The attributes that are used for filtering.
+    *
+    * @return array
+    */
+
+    protected function filterableBy() : array
+    {
+        return ['id', 'INN', 'mechanism'];
+    }
+
+    protected function searchableBy() : array
+    {
+        return ['INN', 'mechanism'];
+        //return ['mechanism'];
+    }
+
+    /**
+     * The attributes that are used for sorting.
+     *
+     * @return array
+     */
+    protected function sortableBy() : array
+    {
+        return ['id', 'INN'];
+    }
+
+    // public function __construct()
+    // {
+    //     $this->authorizeResource(Substance::class, 'substances');
+    // }
 
     // /**
     //  * Display a listing of the resource.
